@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+
+/**
+ * @method static create(array $validate)
+ * @method static find(string $id)
+ */
 class Cadastro_estabelecimento extends Model
 {
     use HasFactory;

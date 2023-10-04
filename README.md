@@ -28,7 +28,7 @@ A API terá as seguintes funcionalidades:
 ## Como Executar o Projeto
 
 
-- Clonar o repositorio 
+- Clonar o repositorio
 
 ```code
 git clone https://github.com/Mizaeldouglas/api-de-gerenciar-estacionamento_Laravel.git

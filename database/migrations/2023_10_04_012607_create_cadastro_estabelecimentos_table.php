@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('cnpj');
             $table->string('phone');
-            $table->bigInteger('number_motorcycles_spaces');
-            $table->bigInteger('number_car_spaces');
+            $table->integer('number_motorcycles_spaces');
+            $table->integer('number_car_spaces');
             $table->timestamps();
         });
     }
