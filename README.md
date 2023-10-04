@@ -31,7 +31,7 @@ A API terá as seguintes funcionalidades:
 - Clonar o repositorio 
 
 ```code
-git clone 
+git clone https://github.com/Mizaeldouglas/api-de-gerenciar-estacionamento_Laravel.git
 ```
 
 - Para instalar as denpedencias do composer (necessario ter instalado o Composer na sua maquina)
