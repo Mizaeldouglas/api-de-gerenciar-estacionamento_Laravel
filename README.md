@@ -50,7 +50,7 @@ php artisan serve
 
 ## Contato
 
-Se você tiver alguma dúvida ou quiser entrar em contato comigo sobre este projeto, você pode me encontrar no [LinkedIn](https://www.linkedin.com/in/seu-nome-aqui/).
+Se você tiver alguma dúvida ou quiser entrar em contato comigo sobre este projeto, você pode me encontrar no [LinkedIn](https://github.com/Mizaeldouglas/api-de-gerenciar-estacionamento_Laravel.git).
 
 
 <br>
