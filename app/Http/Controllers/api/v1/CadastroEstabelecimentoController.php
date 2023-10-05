@@ -38,6 +38,10 @@ class CadastroEstabelecimentoController extends Controller
     public function show (string $id): JsonResponse
     {
         $estabelecimento = Cadastro_estabelecimento::find($id);
+
+        if ($estabelecimento === null){
+            return response()->json(['error' => 'Estabelecimento Não encontrado!'], 404);
+        }
         return response()->json(['Estabelecimento' => $estabelecimento]);
     }
 
@@ -59,6 +63,6 @@ class CadastroEstabelecimentoController extends Controller
         $estabelecimento =  Cadastro_estabelecimento::find($id);
         $estabelecimento->delete();
 
-        return response()->json(['Message' => 'Estabelecimento Removido com Sucesso!!'], 204);
+        return response()->json("estabelecimento deletado Com sucesso!", 204);
     }
 }

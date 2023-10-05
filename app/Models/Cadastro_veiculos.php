@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @method static create(array $validate)
+ */
 class Cadastro_veiculos extends Model
 {
     use HasFactory;
@@ -15,11 +18,13 @@ class Cadastro_veiculos extends Model
         'model',
         'color',
         'plate',
-        'type'
+        'type',
+        'estabelecimento_id'
     ];
 
-    public function cadastro_estabelecimento (): BelongsTo
+    public function cadastro_estabelecimento(): BelongsTo
     {
-        return $this->belongsTo(Cadastro_estabelecimento::class);
+        return $this->belongsTo(Cadastro_estabelecimento::class, 'estabelecimento_id');
     }
+
 }

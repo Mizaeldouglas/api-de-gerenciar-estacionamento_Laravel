@@ -17,11 +17,13 @@ return new class extends Migration
             $table->string('model');
             $table->string('color');
             $table->string('plate');
-            $table->string('type');
+            $table->enum('type', ['carro', 'moto']);
+            $table->unsignedBigInteger('estabelecimento_id')->nullable();
             $table->timestamps();
 
-            $table->unsignedBigInteger('estabelecimento_id');
             $table->foreign('estabelecimento_id')->references('id')->on('cadastro_estabelecimentos');
+
+
         });
     }
 
