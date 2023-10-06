@@ -70,8 +70,14 @@ class CadastroVeiculosController extends Controller
             }
 
             if ($tipoVeiculo === 'carro') {
+                if ($estabelecimento->number_car_spaces <= 0) {
+                    return response()->json(['error' => 'Não há vagas para carros disponíveis!'], 400);
+                }
                 $estabelecimento->number_car_spaces--;
             } elseif ($tipoVeiculo === 'moto') {
+                if ($estabelecimento->number_motorcycles_spaces <= 0) {
+                    return response()->json(['error' => 'Não há vagas para motos disponíveis!'], 400);
+                }
                 $estabelecimento->number_motorcycles_spaces--;
             }
 
@@ -201,19 +207,35 @@ class CadastroVeiculosController extends Controller
     }
 
 
-    public function destroy (string $id)
+    public function destroy(Request $request, string $id)
     {
         try {
             $veiculo = Cadastro_veiculos::find($id);
+
             if ($veiculo === null) {
                 return response()->json(['error' => 'Veículo não encontrado!'], 404);
             }
+
+            // Verifique o tipo do veículo
+            $tipoVeiculo = $veiculo->type;
+
+            // Recupere o estabelecimento relacionado
+            $estabelecimento = $veiculo->cadastro_estabelecimento;
+
+            // Atualize a quantidade de vagas com base no tipo de veículo
+            if ($tipoVeiculo === 'carro') {
+                $estabelecimento->increment('number_car_spaces');
+            } elseif ($tipoVeiculo === 'moto') {
+                $estabelecimento->increment('number_motorcycles_spaces');
+            }
+
+            // Exclua o veículo
             $veiculo->delete();
 
             return response()->json('Deletado com sucesso!', 200);
         } catch (Exception $e) {
             return response()->json(["error" => $e->getMessage()], 500);
         }
-
     }
+
 }

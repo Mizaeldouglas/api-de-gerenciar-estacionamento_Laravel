@@ -10,14 +10,12 @@ A API terá as seguintes funcionalidades:
 
 - Cadastro de veículos: Para registrar informações sobre os veículos que utilizam o estacionamento, incluindo marca, modelo, cor, placa e tipo.
 
-- Controle de entrada e saída de veículos: Para registrar quando um veículo entra e sai do estacionamento, calcular o tempo de permanência e, se aplicável, o valor a ser pago.
-
 ## Progresso
 
 - [x] Diagrama de banco de dados: Concluído
-- [ ] Implementação da API com Laravel: Em andamento
+- [x] Implementação da API com Laravel: Em andamento
 - [ ] Testes da API: Pendente
-- [ ] Documentação: Pendente
+- [x] Documentação: Pendente
 
 ## Tecnologias Utilizadas
 
@@ -50,7 +48,7 @@ php artisan serve
 
 ## Contato
 
-Se você tiver alguma dúvida ou quiser entrar em contato comigo sobre este projeto, você pode me encontrar no [LinkedIn](https://github.com/Mizaeldouglas/api-de-gerenciar-estacionamento_Laravel.git).
+Se você tiver alguma dúvida ou quiser entrar em contato comigo sobre este projeto, você pode me encontrar no [LinkedIn](https://www.linkedin.com/in/mizaeldouglas/).
 
 
 <br>
