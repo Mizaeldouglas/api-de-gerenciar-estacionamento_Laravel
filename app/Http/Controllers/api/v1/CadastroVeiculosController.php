@@ -49,10 +49,9 @@ class CadastroVeiculosController extends Controller
     }
 
 
-    public function store (Request $request): JsonResponse
+    public function store(Request $request): JsonResponse
     {
         try {
-
             $validate = $request->validate([
                 'brand' => 'required',
                 'model' => 'required',
@@ -62,40 +61,53 @@ class CadastroVeiculosController extends Controller
                 'estabelecimento_id' => 'nullable|exists:cadastro_estabelecimentos,id'
             ]);
 
-            $veiculo = Cadastro_veiculos::create($validate);
-            $estabelecimento = Cadastro_estabelecimento::all();
+            $tipoVeiculo = $request->input('type');
 
+            $estabelecimento = Cadastro_estabelecimento::find($request->input('estabelecimento_id'));
 
-            foreach ($estabelecimento as $item) {
-                $response = [
-                    'Veiculo' => [
-                        'id' => $veiculo->id,
-                        'brand' => $veiculo->brand,
-                        'model' => $veiculo->model,
-                        'color' => $veiculo->color,
-                        'plate' => $veiculo->plate,
-                        'type' => $veiculo->type,
-                        'estabelecimento_id' => [
-                            'Estabelecimento' => [
-                                'id' => $item->id,
-                                'name' => $item->name,
-                                'cnpj' => $item->cnpj,
-                                'phone' => $item->phone,
-                                'number_motorcycles_spaces' => $item->number_motorcycles_spaces,
-                                'number_car_spaces' => $item->number_car_spaces,
-                            ]
-                        ],
-                        'updated_at' => $veiculo->updated_at,
-                        'created_at' => $veiculo->created_at,
-                    ]
-                ];
+            if ($estabelecimento === null) {
+                return response()->json(['error' => 'Estabelecimento não encontrado!'], 404);
             }
+
+            if ($tipoVeiculo === 'carro') {
+                $estabelecimento->number_car_spaces--;
+            } elseif ($tipoVeiculo === 'moto') {
+                $estabelecimento->number_motorcycles_spaces--;
+            }
+
+            $estabelecimento->save();
+
+            $veiculo = Cadastro_veiculos::create($validate);
+
+            $response = [
+                'Veiculo' => [
+                    'id' => $veiculo->id,
+                    'brand' => $veiculo->brand,
+                    'model' => $veiculo->model,
+                    'color' => $veiculo->color,
+                    'plate' => $veiculo->plate,
+                    'type' => $veiculo->type,
+                    'estabelecimento_id' => [
+                        'Estabelecimento' => [
+                            'id' => $estabelecimento->id,
+                            'name' => $estabelecimento->name,
+                            'cnpj' => $estabelecimento->cnpj,
+                            'phone' => $estabelecimento->phone,
+                            'number_motorcycles_spaces' => $estabelecimento->number_motorcycles_spaces,
+                            'number_car_spaces' => $estabelecimento->number_car_spaces,
+                        ]
+                    ],
+                    'updated_at' => $veiculo->updated_at,
+                    'created_at' => $veiculo->created_at,
+                ]
+            ];
 
             return response()->json($response, 201);
         } catch (Exception $e) {
             return response()->json(["error" => $e->getMessage()], 500);
         }
     }
+
 
 
     public function show (string $id)
